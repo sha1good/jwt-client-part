@@ -13,7 +13,7 @@ function App() {
 
   const refreshToken = async () => {
     try {
-      const res = await axios.post("/refresh", { token: user.refreshToken });
+      const res = await axios.post("https://jwt-api.onrender.com/api/refresh", { token: user.refreshToken });
       setUser({
         ...user,
         accessToken: res.data.accessToken,
@@ -45,7 +45,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/login", { username, password });
+      const res = await axios.post("https://jwt-api.onrender.com/api/login", { username, password });
       setUser(res.data);
     } catch (err) {
       console.log(err);
@@ -56,7 +56,7 @@ function App() {
    setLogoutMessage(false)
    setError(false)
    try {
-     await axiosJWT.post("/logout", { token: user.refreshToken}, {
+     await axiosJWT.post("https://jwt-api.onrender.com/api/logout", { token: user.refreshToken}, {
       headers: { authorization : "Bearer " + user.accessToken}
      });
      setLogoutMessage(true)  
@@ -68,7 +68,7 @@ function App() {
     setSuccess(false);
     setError(false);
     try {
-      await axiosJWT.delete("/users/" + id, {
+      await axiosJWT.delete("https://jwt-api.onrender.com/api/users/" + id, {
         headers: { authorization: "Bearer " + user.accessToken },
       });
       setSuccess(true);
